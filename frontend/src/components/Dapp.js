@@ -60,19 +60,10 @@ export class Dapp extends React.Component {
   }
 
   render() {
-    // Ethereum wallets inject the window.ethereum object. If it hasn't been
-    // injected, we instruct the user to install MetaMask.
     if (window.ethereum === undefined) {
       return <NoWalletDetected />;
     }
 
-    // The next thing we need to do, is to ask the user to connect their wallet.
-    // When the wallet gets connected, we are going to save the users's address
-    // in the component's state. So, if it hasn't been saved yet, we have
-    // to show the ConnectWallet component.
-    //
-    // Note that we pass it a callback that is going to be called when the user
-    // clicks a button. This callback just calls the _connectWallet method.
     if (!this.state.selectedAddress) {
       return (
         <ConnectWallet 
@@ -83,13 +74,10 @@ export class Dapp extends React.Component {
       );
     }
 
-    // If the token data or the user's balance hasn't loaded yet, we show
-    // a loading component.
     if (!this.state.tokenData || !this.state.balance) {
       return <Loading />;
     }
 
-    // If everything is loaded, we render the application.
     return (
       <div className="container p-4">
         <div className="row">
